@@ -8,8 +8,8 @@ export const genericSearch = <T>(
     return true;
   }
 
-  return properties.some(property => {
-    const value = object[property];
+  return properties.some((property: keyof T): boolean => {
+    const value: T[keyof T] = object[property];
     if (typeof value === 'string' || typeof value === 'number') {
       return shouldBeCaseSensitive
         ? value.toString().includes(query)
