@@ -9,6 +9,7 @@ import {IPerson} from './interfaces/IPerson';
 import {IWidget} from './interfaces/IWidget';
 import {ISortProperty} from './interfaces/ISortProperty';
 import {WidgetRenderer} from './components/renderers/WidgetRenderer';
+import {PersonRenderer} from './components/renderers/PersonRenderer';
 
 function App() {
   const [query, setQuery] = useState('');
@@ -67,9 +68,18 @@ function App() {
         .map(person => {
           return <h3>{person.firstName}</h3>;
         })} */}
-      <h2>Widgets:</h2>
+      {/* <h2>Widgets:</h2>
       {widgets.map(widget => {
         return <WidgetRenderer key={widget.id} {...widget} />;
+      })} */}
+      <h2>People:</h2>
+      {people.map(person => {
+        return (
+          <PersonRenderer
+            key={`${person.firstName}-${person.lastName}-${person.birthday}`}
+            {...person}
+          />
+        );
       })}
     </>
   );
