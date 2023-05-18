@@ -8,6 +8,7 @@ import {Sorters} from './components/Sorters';
 import {IPerson} from './interfaces/IPerson';
 import {IWidget} from './interfaces/IWidget';
 import {ISortProperty} from './interfaces/ISortProperty';
+import {WidgetRenderer} from './components/renderers/WidgetRenderer';
 
 function App() {
   const [query, setQuery] = useState('');
@@ -43,7 +44,8 @@ function App() {
             {person.firstName} {person.lastName}
           </h3>
         ))} */}
-      <br></br>
+
+      {/* <br></br>
       <h1>Sorting</h1>
       <h2>Widgets:</h2>
       <Sorters
@@ -64,7 +66,11 @@ function App() {
         .sort((a, b) => genericSort(a, b, personSortProperty.property))
         .map(person => {
           return <h3>{person.firstName}</h3>;
-        })}
+        })} */}
+      <h2>Widgets:</h2>
+      {widgets.map(widget => {
+        return <WidgetRenderer key={widget.id} {...widget} />;
+      })}
     </>
   );
 }
