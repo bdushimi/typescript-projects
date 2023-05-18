@@ -8,6 +8,7 @@ import {Sorters} from './components/Sorters';
 import {IPerson} from './interfaces/IPerson';
 import {IWidget} from './interfaces/IWidget';
 import {ISortProperty} from './interfaces/ISortProperty';
+import {SortDirection} from './components/SortDirection';
 import {WidgetRenderer} from './components/renderers/WidgetRenderer';
 import {PersonRenderer} from './components/renderers/PersonRenderer';
 
@@ -24,14 +25,28 @@ function App() {
 
   const [personSearchQuery, setPersonSearchQuery] = useState('');
 
+  // The new stateful variables storing the sort direction
+  const [widgetsIsDescending, setWidgetsIsDescending] = useState(false);
+  const [peopleIsDescending, setPeopleIsDescending] = useState(false);
+
   return (
     <>
       <h2>Widgets:</h2>
       <SearchInput setSearchQuery={setWidgetSearchQuery} />
-      <Sorters
-        setSortProperty={property => setWidgetSortProperty({property})}
-        object={widgets[0]}
-      />
+      <div className="row">
+        <div className="col-6">
+          <Sorters
+            setSortProperty={property => setWidgetSortProperty({property})}
+            object={widgets[0]}
+          />
+        </div>
+        <div className="col-6">
+          <SortDirection
+            isDescending={widgetsIsDescending}
+            setIsDescending={value => setWidgetsIsDescending(value)}
+          />
+        </div>
+      </div>
       {widgets
         .filter(widget =>
           genericSearch(
@@ -41,16 +56,28 @@ function App() {
             false
           )
         )
-        .sort((a, b) => genericSort(a, b, widgetSortProperty.property))
+        .sort((a, b) =>
+          genericSort(a, b, widgetSortProperty.property, widgetsIsDescending)
+        )
         .map(widget => {
           return <WidgetRenderer key={widget.id} {...widget} />;
         })}
       <h2>People:</h2>
       <SearchInput setSearchQuery={setPersonSearchQuery} />
-      <Sorters
-        setSortProperty={property => setPersonSortProperty({property})}
-        object={people[0]}
-      />
+      <div className="row">
+        <div className="col-6">
+          <Sorters
+            setSortProperty={property => setPersonSortProperty({property})}
+            object={people[0]}
+          />
+        </div>
+        <div className="col-6">
+          <SortDirection
+            isDescending={peopleIsDescending}
+            setIsDescending={value => setPeopleIsDescending(value)}
+          />
+        </div>
+      </div>
       {people
         .filter(widget =>
           genericSearch(
@@ -60,7 +87,9 @@ function App() {
             false
           )
         )
-        .sort((a, b) => genericSort(a, b, personSortProperty.property))
+        .sort((a, b) =>
+          genericSort(a, b, personSortProperty.property, peopleIsDescending)
+        )
         .map((person, index) => {
           return <PersonRenderer key={index} {...person} />;
         })}

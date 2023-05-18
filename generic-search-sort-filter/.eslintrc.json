@@ -1,3 +1,17 @@
+// Default Configs
+// {
+//   "extends": "./node_modules/gts/" 
+// }
 {
-  "extends": "./node_modules/gts/" 
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "./node_modules/gts/"
+  ],
+  "rules": {
+    // Other ESLint rules
+  }
 }
+
