@@ -11,7 +11,7 @@ export interface ISearchInputProps<T> {
 
 export function SearchInput<T>(props: ISearchInputProps<T>) {
   const {data, renderItem, initialSearchQuery, searchKeys} = props;
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
 
   // Generate a debounced version of our setSearchQuery function
   const setSearchQueryDebounced = useDebounce(event => {
