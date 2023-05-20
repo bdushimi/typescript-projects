@@ -4,10 +4,9 @@
 // }
 {
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "plugins": [],
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
     "./node_modules/gts/"
   ],
   "rules": {

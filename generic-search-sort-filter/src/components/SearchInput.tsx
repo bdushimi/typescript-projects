@@ -1,12 +1,17 @@
-import React from 'react';
+import React, {ReactNode, useState} from 'react';
 import {useDebounce} from '../hooks/useDebounce';
+import {genericSearch} from '../utils/genericSearch';
 
-export interface ISearchInputProps {
-  setSearchQuery: (searchQuery: string) => void;
+export interface ISearchInputProps<T> {
+  data: Array<T>;
+  renderItem: (item: T) => ReactNode;
+  initialSearchQuery: string;
+  searchKeys: Array<keyof T>;
 }
 
-export function SearchInput(props: ISearchInputProps) {
-  const {setSearchQuery} = props;
+export function SearchInput<T>(props: ISearchInputProps<T>) {
+  const {data, renderItem, initialSearchQuery, searchKeys} = props;
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Generate a debounced version of our setSearchQuery function
   const setSearchQueryDebounced = useDebounce(event => {
@@ -17,7 +22,7 @@ export function SearchInput(props: ISearchInputProps) {
   return (
     <>
       <label htmlFor="search" className="mt-3">
-        Search here
+        Search
       </label>
       <input
         id="search"
@@ -25,8 +30,15 @@ export function SearchInput(props: ISearchInputProps) {
         type="search"
         placeholder="Search..."
         aria-label="Search"
-        onChange={setSearchQueryDebounced}
+        onChange={event => {
+          event.persist();
+          setSearchQueryDebounced(event);
+        }}
       />
+      {data &&
+        data
+          .filter(item => genericSearch(item, searchKeys, searchQuery, false))
+          .map(renderItem)}
     </>
   );
 }
