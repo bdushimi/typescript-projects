@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
 import {widgets} from './mock-data/widget';
 import {people} from './mock-data/people';
-import {SearchInput} from './components/SearchInput';
 import {WidgetRenderer} from './components/renderers/WidgetRenderer';
+import {SearchSortAndFilter} from './components/SearchSortAndFilter';
 import {PersonRenderer} from './components/renderers/PersonRenderer';
-import {Sorters} from './components/Sorters';
 
 function App() {
   const [showPeople, setShowPeople] = useState<boolean>(false);
@@ -20,37 +19,42 @@ function App() {
         {buttonText}
       </button>
       {!showPeople ? (
-        <>
-          <SearchInput
-            data={widgets}
-            renderItem={item => <WidgetRenderer {...item} />}
-            initialSearchQuery=""
-            searchKeys={['title', 'description']}
-          />
-          <Sorters
-            data={widgets}
-            renderItem={widget => <WidgetRenderer {...widget} />}
-            label="Sort options for widgets"
-            initialSortProperty="title"
-            initialIsDescending={false}
-          />
-        </>
+        <SearchSortAndFilter
+          key="widgets"
+          title="Widgets:"
+          data={widgets}
+          renderItem={widget => <WidgetRenderer {...widget} key={widget.id} />}
+          searchLabel="Search for widgets"
+          searchProperties={['title', 'description']}
+          shouldBeCaseSensitive={false}
+          sortersLabel="Sort widgets"
+          initialSortProperty="title"
+          filtersLabel="Filter widgets"
+          initialIsDescending={true}
+          initialFilterProperties={[]}
+          initialSearchQuery=""
+        />
       ) : (
-        <>
-          <SearchInput
-            data={people}
-            renderItem={item => <PersonRenderer {...item} />}
-            initialSearchQuery=""
-            searchKeys={['firstName', 'lastName', 'eyeColor']}
-          />
-          <Sorters
-            data={people}
-            renderItem={person => <PersonRenderer {...person} />}
-            label="Sort options for widgets"
-            initialSortProperty="firstName"
-            initialIsDescending={false}
-          />
-        </>
+        <SearchSortAndFilter
+          key="people"
+          title="People:"
+          data={people}
+          renderItem={person => (
+            <PersonRenderer
+              {...person}
+              key={`${person.firstName}-${person.lastName}-${person.birthday}`}
+            />
+          )}
+          searchLabel="Search for people"
+          searchProperties={['firstName', 'lastName', 'eyeColor']}
+          shouldBeCaseSensitive={false}
+          sortersLabel="Sort people"
+          initialSortProperty="firstName"
+          filtersLabel="Filter people"
+          initialIsDescending={false}
+          initialFilterProperties={[]}
+          initialSearchQuery=""
+        />
       )}
     </>
   );
