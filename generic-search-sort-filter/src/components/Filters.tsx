@@ -63,7 +63,7 @@ export function Filters<T>(props: IFiltersProps<T>) {
               )}
               className="m-1 ml-3"
             />
-            <label htmlFor={`${key}-true`}>'{key}' is truthy</label>
+            <label htmlFor={`${key}-true`}>'{key}' is provided</label>
             <input
               type="checkbox"
               id={`${key}-false`}
@@ -81,7 +81,7 @@ export function Filters<T>(props: IFiltersProps<T>) {
               )}
               className="m-1 ml-3"
             />
-            <label htmlFor={`${key}-false`}>'{key}' is falsy</label>
+            <label htmlFor={`${key}-false`}>'{key}' is not provided</label>
             <br />
           </Fragment>
         );

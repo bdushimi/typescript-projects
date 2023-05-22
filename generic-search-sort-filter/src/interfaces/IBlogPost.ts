@@ -1,7 +1,7 @@
 export interface IBlogPost {
   id: number;
-  title: string;
-  description: string;
+  title: string | null | undefined;
+  description: string | undefined | null;
   viewCount: number;
   publishedAt: string;
 }

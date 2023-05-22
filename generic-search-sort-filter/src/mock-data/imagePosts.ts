@@ -34,4 +34,11 @@ export const imagePosts: Array<IImagePost> = [
     comments: ['Just perfect!', 'Amazing vibes!'],
     publishedAt: '2020-01-01T00:00:00.000Z',
   },
+  {
+    id: 4,
+    imageUrl: 'https://picsum.photos/id/4/300/300',
+    caption: null,
+    comments: ['Just perfect!', 'Amazing vibes!'],
+    publishedAt: '2020-01-01T00:00:00.000Z',
+  },
 ];

@@ -17,7 +17,7 @@ export function BlogPostRenderer(props: IBlogPost) {
   const formattedDate = tryFormatDate();
 
   return (
-    <div className="col-12 p-3" style={{width: '18rem'}}>
+    <div className="col-12 p-3">
       <div className="card">
         <div className="card-body">
           <h1 className="card-title">{title}</h1>

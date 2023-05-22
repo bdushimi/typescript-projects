@@ -29,4 +29,32 @@ export const blogPosts: Array<IBlogPost> = [
     viewCount: 122,
     publishedAt: '2020-01-01T00:00:00.000Z',
   },
+  {
+    id: 4,
+    title: null,
+    description: 'This blog post has a null title',
+    viewCount: 122,
+    publishedAt: '2020-01-01T00:00:00.000Z',
+  },
+  {
+    id: 5,
+    title: undefined,
+    description: 'This blog post has an undefined title',
+    viewCount: 3,
+    publishedAt: '2020-01-01T00:00:00.000Z',
+  },
+  {
+    id: 6,
+    title: 'This blog post has a null description',
+    description: null,
+    viewCount: 90,
+    publishedAt: '2020-01-01T00:00:00.000Z',
+  },
+  {
+    id: 7,
+    title: 'This blog post has an undefined description',
+    description: undefined,
+    viewCount: 122,
+    publishedAt: '2020-01-01T00:00:00.000Z',
+  },
 ];

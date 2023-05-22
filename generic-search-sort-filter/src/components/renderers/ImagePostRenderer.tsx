@@ -17,9 +17,13 @@ export function ImagePostRenderer(props: IImagePost) {
   const formattedDate = tryFormatDate();
 
   return (
-    <div className="col-12 p-3" style={{width: '18rem'}}>
+    <div className="col-12 p-3">
       <div className="card">
-        <img src={imageUrl} className="card-img-top" alt={caption} />
+        <img
+          src={imageUrl}
+          className="card-img-top"
+          alt={caption ? caption : 'caption is not available'}
+        />
         <div className="card-body">
           <h1 className="card-title">{caption}</h1>
           <p className="card-text">Comments:</p>
