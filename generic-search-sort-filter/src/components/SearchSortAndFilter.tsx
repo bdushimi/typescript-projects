@@ -6,7 +6,7 @@ import {genericSort} from '../utils/genericSort';
 import {Filters} from './Filters';
 import {SearchInput} from './SearchInput';
 import {Sorters} from './Sorters';
-import {SortDirection} from './SortDirection';
+import {ISortProperty} from '../interfaces/ISortProperty';
 
 interface ISearchSortAndFilterProps<T> {
   title: string;
@@ -17,7 +17,7 @@ interface ISearchSortAndFilterProps<T> {
   searchProperties: Array<keyof T>;
   shouldBeCaseSensitive: boolean;
   sortersLabel: string;
-  initialSortProperty: keyof T;
+  initialSortProperty: ISortProperty<T>;
   initialIsDescending: boolean;
   filtersLabel: string;
   initialFilterProperties: Array<IFilter<T>>;
@@ -53,21 +53,12 @@ export function SearchSortAndFilter<T>(props: ISearchSortAndFilterProps<T>) {
         label={searchLabel}
         setSearchQuery={searchQuery => setSearchQuery(searchQuery)}
       />
-      <div className="row">
-        <div className="col-6">
-          <Sorters
-            label={sortersLabel}
-            object={data && data.length > 0 ? data[0] : {}}
-            setSortProperty={sortProperty => setSortProperty(sortProperty)}
-          />
-        </div>
-        <div className="col-6">
-          <SortDirection
-            isDescending={isDescending}
-            setIsDescending={isDescending => setIsDescending(isDescending)}
-          />
-        </div>
-      </div>
+      <Sorters
+        label={sortersLabel}
+        object={data && data.length > 0 ? data[0] : null}
+        setSortProperty={sortProperty => setSortProperty(sortProperty)}
+        currentSortProperty={sortProperty}
+      />
       <Filters
         label={filtersLabel}
         object={data && data.length > 0 ? data[0] : {}}
@@ -86,7 +77,7 @@ export function SearchSortAndFilter<T>(props: ISearchSortAndFilterProps<T>) {
               shouldBeCaseSensitive
             )
           )
-          .sort((a, b) => genericSort(a, b, sortProperty, isDescending))
+          .sort((a, b) => genericSort(a, b, sortProperty))
           .filter(a => genericFilter(a, filterProperties))
           .map(a => renderItem(a))}
     </>

@@ -29,7 +29,7 @@ function App() {
           searchProperties={['title', 'description']}
           shouldBeCaseSensitive={true}
           sortersLabel="Sort blog posts..."
-          initialSortProperty="title"
+          initialSortProperty={{property: 'title', isDescending: false}}
           filtersLabel="Filter blog posts..."
           initialIsDescending={true}
           initialFilterProperties={[]}
@@ -47,7 +47,7 @@ function App() {
           searchProperties={['caption', 'comments']}
           shouldBeCaseSensitive={true}
           sortersLabel="Sort image posts"
-          initialSortProperty="caption"
+          initialSortProperty={{property: 'caption', isDescending: false}}
           filtersLabel="Filter image posts"
           initialIsDescending={false}
           initialFilterProperties={[]}
