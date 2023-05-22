@@ -1,56 +1,54 @@
 import React, {useState} from 'react';
-import {widgets} from './mock-data/widget';
-import {people} from './mock-data/people';
-import {WidgetRenderer} from './components/renderers/WidgetRenderer';
+import {blogPosts} from './mock-data/blogPosts';
+import {imagePosts} from './mock-data/imagePosts';
+import {BlogPostRenderer} from './components/renderers/BlogPostRenderer';
+import {ImagePostRenderer} from './components/renderers/ImagePostRenderer';
 import {SearchSortAndFilter} from './components/SearchSortAndFilter';
-import {PersonRenderer} from './components/renderers/PersonRenderer';
 
 function App() {
-  const [showPeople, setShowPeople] = useState<boolean>(false);
-
-  const buttonText = showPeople ? 'Show widgets' : 'Show people';
+  const [showImagePosts, setShowImagePosts] = useState<boolean>(false);
+  const buttonText = showImagePosts ? 'Show blog posts' : 'Show image posts';
 
   return (
     <>
       <button
         className="btn btn-primary"
-        onClick={() => setShowPeople(!showPeople)}
+        onClick={() => setShowImagePosts(!showImagePosts)}
       >
         {buttonText}
       </button>
-      {!showPeople ? (
+      {!showImagePosts ? (
         <SearchSortAndFilter
-          key="widgets"
-          title="Widgets:"
-          data={widgets}
-          renderItem={widget => <WidgetRenderer {...widget} key={widget.id} />}
-          searchLabel="Search for widgets"
-          searchProperties={['title', 'description']}
-          shouldBeCaseSensitive={false}
-          sortersLabel="Sort widgets"
+          key="BlogPosts"
+          title="Blog Posts:"
+          data={blogPosts}
+          renderItem={blogPost => (
+            <BlogPostRenderer {...blogPost} key={blogPost.id} />
+          )}
+          searchLabel="Search for blog posts..."
+          searchProperties={['title']}
+          shouldBeCaseSensitive={true}
+          sortersLabel="Sort blog posts..."
           initialSortProperty="title"
-          filtersLabel="Filter widgets"
+          filtersLabel="Filter blog posts..."
           initialIsDescending={true}
           initialFilterProperties={[]}
           initialSearchQuery=""
         />
       ) : (
         <SearchSortAndFilter
-          key="people"
-          title="People:"
-          data={people}
-          renderItem={person => (
-            <PersonRenderer
-              {...person}
-              key={`${person.firstName}-${person.lastName}-${person.birthday}`}
-            />
+          key="ImagePosts"
+          title="Image Posts:"
+          data={imagePosts}
+          renderItem={imagePost => (
+            <ImagePostRenderer {...imagePost} key={imagePost.id} />
           )}
-          searchLabel="Search for people"
-          searchProperties={['firstName', 'lastName', 'eyeColor']}
-          shouldBeCaseSensitive={false}
-          sortersLabel="Sort people"
-          initialSortProperty="firstName"
-          filtersLabel="Filter people"
+          searchLabel="Search for Image posts..."
+          searchProperties={['caption']}
+          shouldBeCaseSensitive={true}
+          sortersLabel="Sort image posts"
+          initialSortProperty="caption"
+          filtersLabel="Filter image posts"
           initialIsDescending={false}
           initialFilterProperties={[]}
           initialSearchQuery=""
