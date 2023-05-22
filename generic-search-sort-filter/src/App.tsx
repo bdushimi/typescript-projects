@@ -26,7 +26,7 @@ function App() {
             <BlogPostRenderer {...blogPost} key={blogPost.id} />
           )}
           searchLabel="Search for blog posts..."
-          searchProperties={['title']}
+          searchProperties={['title', 'description']}
           shouldBeCaseSensitive={true}
           sortersLabel="Sort blog posts..."
           initialSortProperty="title"
@@ -44,7 +44,7 @@ function App() {
             <ImagePostRenderer {...imagePost} key={imagePost.id} />
           )}
           searchLabel="Search for Image posts..."
-          searchProperties={['caption']}
+          searchProperties={['caption', 'comments']}
           shouldBeCaseSensitive={true}
           sortersLabel="Sort image posts"
           initialSortProperty="caption"
